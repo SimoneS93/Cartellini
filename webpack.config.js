@@ -56,12 +56,23 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015']
+          plugins: ['transform-runtime'],
+          presets: ['es2015', 'stage-0']
         }
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+          options: {
+              loaders: {
+                  js: {
+                      loader: 'babel-loader',
+                      options: {
+                          presets: ['es2015']
+                      }
+                  },
+              }
+          }
       }
     ]
   },
