@@ -98,4 +98,4 @@ app.use(router.routes())
 
 // listen
 
-if (!module.parent) app.listen(process.env.port || 3002);
+if (!module.parent) app.listen(process.env.port || 3002, '0.0.0.0');
