@@ -2,7 +2,8 @@
 
 const router = require('koa-router')()
 const koaBody = require('koa-body')
-const serve = require('koa-static');
+const serve = require('koa-static')
+const send = require('koa-send')
 const koaMongo = require('koa-mongo')
 var handlebars = require('koa-handlebars')
 const Koa = require('koa')
@@ -16,7 +17,7 @@ function collect(ctx) {
 }
 
 // middleware
-app.use(serve('dist'))
+// app.use(serve('dist'))
 
 app.use(koaBody())
 
@@ -33,6 +34,12 @@ app.use(handlebars({
 
 
 // route definitions
+
+// > static files
+router.get('/app.js', async (ctx) => {
+    await send(ctx, 'dist/app.js')
+})
+
 
 // > Employees listing
 router.get('/', async (ctx) => {
