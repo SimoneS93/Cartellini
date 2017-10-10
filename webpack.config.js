@@ -1,5 +1,6 @@
-var webpack = require('webpack');
-var path = require('path');
+var webpack = require('webpack')
+var path = require('path')
+const VersioningPlugin = require('versioning-webpack-plugin')
 
 
 // Naming and path settings
@@ -8,7 +9,20 @@ var entryPoint = './src/app.js';
 var exportPath = path.resolve(__dirname, './dist');
 
 // Enviroment flag
-var plugins = [];
+var plugins = [
+    new VersioningPlugin({
+        cleanup: true,                      // should it remove old files?
+        basePath: './',                     // manifest.json base path
+        manifestFilename: 'manifest.json'   // name of the manifest file
+    }),
+    function(compiler) {
+        this.plugin("done", function(stats) {
+            require("fs").writeFileSync(
+                path.join(__dirname, "stats.json"),
+                JSON.stringify(stats.toJson().assetsByChunkName));
+        });
+    }
+];
 var env = process.env.WEBPACK_ENV;
 
 // Differ settings based on production flag
@@ -33,7 +47,7 @@ module.exports = {
   entry: entryPoint,
   output: {
     path: exportPath,
-    filename: appName
+    filename: `[chunkhash]_${appName}`
   },
   module: {
     loaders: [

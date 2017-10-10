@@ -10,6 +10,7 @@ const Koa = require('koa')
 
 // the app
 const app = module.exports = new Koa()
+const bundle = require('./stats.json')
 
 
 function collect(ctx) {
@@ -37,7 +38,7 @@ app.use(handlebars({
 
 // > static files
 router.get('/app.js', async (ctx) => {
-    await send(ctx, 'dist/app.js')
+    await send(ctx, `dist/${bundle.main}`, { immutable: true })
 })
 
 
