@@ -8,7 +8,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run serve",
     "serve:dev": "nodemon --watch . -x node index.js",
+    "serve": "node index.js",
     "bundle:dev": "WEBPACK_ENV=dev webpack --progress --colors",
     "bundle:watch": "WEBPACK_ENV=dev webpack --progress --colors --watch",
     "bundle:prod": "WEBPACK_ENV=production webpack"
