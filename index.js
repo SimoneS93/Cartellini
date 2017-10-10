@@ -12,6 +12,7 @@ const Koa = require('koa')
 const app = module.exports = new Koa()
 const bundle = require('./stats.json')
 
+process.env.TZ = 'Europe/Rome'
 
 function collect(ctx) {
     return ctx.mongo.db('heroku_bk0c3fqd').collection('timestamps')
