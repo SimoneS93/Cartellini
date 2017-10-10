@@ -79,8 +79,6 @@ router.get('/employees/:id/timetable/:year/:month', async (ctx) => {
         }
     }).toArray()
 
-    console.log('timestamps', timestamps)
-
     await ctx.render('timetable', {
         employee,
         timestamps,

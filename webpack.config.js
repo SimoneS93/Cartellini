@@ -47,7 +47,7 @@ module.exports = {
   entry: entryPoint,
   output: {
     path: exportPath,
-    filename: `[chunkhash]_${appName}`
+    filename: appName
   },
   module: {
     loaders: [
